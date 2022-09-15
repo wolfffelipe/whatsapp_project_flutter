@@ -1,15 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_project_flutter/Home.dart';
+import 'package:whatsapp_project_flutter/Login.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  /*
   FirebaseFirestore.instance
       .collection("usuarios")
       .doc("001")
       .set({"nome": "felipe"});
+  */
 
   runApp(MaterialApp(
-    home: Home(),
+    home: Login(),
+    theme: ThemeData(
+      primaryColor: Color(0xff075E54),
+      //accentColor: Color(0xff075E54),
+    ),
     debugShowCheckedModeBanner: false,
   ));
 }
@@ -41,11 +52,21 @@ void main() {
           android.useAndroidX=true
           android.enableJetifier=true
 
-  5.    Conferir de no "build.gradle" da pasta "app" existe a linha 
-        "multiDexEnabled true" em "DefaultConfig"
+  5.    Conferir de no "build.gradle" da pasta "app" 
+        - Se existe a linha "multiDexEnabled true" em "DefaultConfig"
+        - minSdkVersion 21
+        - targetSdkVersion 30
 
-  6.    Pode dar erro também no mesmo local do item 4 com a ausência do "minSdkVersion 19"
-  
-  7.    Configurar o Cloud Firestore no console do Firebase
+  6.    Configurar o Cloud Firestore no console do Firebase
 
+  7.    No main.dart:
+        import 'package:firebase_core/firebase_core.dart';
+
+        Future main() async {
+          WidgetsFlutterBinding.ensureInitialized();
+          await Firebase.initializeApp();
+        [...]
+
+  Resumo:
+  https://www.youtube.com/watch?v=sz4slPFwEvs&ab_channel=JohannesMilke
 */
