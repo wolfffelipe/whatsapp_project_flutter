@@ -1,20 +1,15 @@
-<center>
 <h1>Mensageiro Whatsapp</h1>
-
 
 ![Badge](https://img.shields.io/badge/Dart-green?style=flat-square&logo=Dart&logoColor=white) ![Badge](https://img.shields.io/badge/Flutter-blue?style=flat-square&logo=Flutter&logoColor=white) ![Badge](https://img.shields.io/badge/Firebase-orange?style=flat-square&logo=Firebase&logoColor=white)
 
-</center>
 
 <br><br>
-🚧 <font color="yellow"><b>Projeto em construção</b></font> 🚧
+🚧 <b>Projeto em construção</b>🚧
 <br><br><br>
 
 ## 🚀 Começando
----
 
 Em breve...
-
 
 <br>
 
@@ -28,13 +23,9 @@ Em breve...
 
 Em breve...
 
-
 <br>
 
 ## ⚙️ Configuração do Database
----
-
-<font size="2">
 
 🔸Criação do projeto Flutter
   
@@ -67,7 +58,6 @@ Em breve...
     android.useAndroidX=true
     android.enableJetifier=true
 
-</font>
 
 #### 🔸Conferir se no "build.gradle" da pasta "app" 
 
@@ -96,14 +86,12 @@ Em breve...
 <br>
 
 ## 📦 Implantação
----
 
 Em breve...
 
 <br>
 
 ## 🛠️ Referências
----
 
 * [Dart](https://rometools.github.io/rome/) - Linguagem
 * [Flutter](https://rometools.github.io/rome/) - Framework
@@ -113,7 +101,6 @@ Em breve...
 
 <!--
 ## 📌 Versão
----
 
 Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [repo](link). 
 -->

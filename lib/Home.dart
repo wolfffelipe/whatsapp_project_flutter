@@ -10,6 +10,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Whatsapp"),
+        backgroundColor: Color(0xff075E54),
+      ),
+      body: Container(),
+    );
   }
 }

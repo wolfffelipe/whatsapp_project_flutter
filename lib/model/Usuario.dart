@@ -1,0 +1,23 @@
+class Usuario {
+  String? _nome;
+  String? _email;
+  String? _senha;
+
+  Usuario();
+
+  String get nome => _nome!;
+  String get email => _email!;
+  String get senha => _senha!;
+
+  set nome(String nome) {
+    _nome = nome;
+  }
+
+  set email(String email) {
+    _email = email;
+  }
+
+  set senha(String senha) {
+    _senha = senha;
+  }
+}

@@ -1,83 +1,80 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_project_flutter/Cadastro.dart';
-import 'package:whatsapp_project_flutter/Home.dart';
 import 'package:whatsapp_project_flutter/model/Usuario.dart';
+import 'package:whatsapp_project_flutter/Home.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Cadastro extends StatefulWidget {
+  const Cadastro({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Cadastro> createState() => _CadastroState();
 }
 
-class _LoginState extends State<Login> {
+class _CadastroState extends State<Cadastro> {
+  //Controladores
+  TextEditingController _controllerNome = TextEditingController();
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerSenha = TextEditingController();
   String _msgErro = "";
 
   _validarCampos() {
     //Recuperar dados dos campos
+    String nome = _controllerNome.text;
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
 
     //Validações
-    if (email.isEmpty) {
+    if (nome.isEmpty || nome.length <= 3) {
       setState(() {
-        _msgErro = "E-mail inválido";
+        _msgErro = "Nome inválido";
       });
     } else {
-      if (senha.isEmpty) {
+      if (email.isEmpty) {
         setState(() {
-          _msgErro = "Senha deve conter no mínimo 6 caracteres";
+          _msgErro = "E-mail inválido";
         });
       } else {
-        setState(() {
-          _msgErro = "";
-        });
+        if (senha.length <= 5) {
+          setState(() {
+            _msgErro = "Senha deve conter no mínimo 6 caracteres";
+          });
+        } else {
+          setState(() {
+            _msgErro = "";
+          });
 
-        Usuario usuario = Usuario();
-        usuario.email = email;
-        usuario.senha = senha;
+          Usuario usuario = Usuario();
+          usuario.nome = nome;
+          usuario.email = email;
+          usuario.senha = senha;
 
-        _logarUsuario(usuario);
+          _cadastrarUsuario(usuario);
+        }
       }
     }
   }
 
-  _logarUsuario(Usuario usuario) {
+  _cadastrarUsuario(Usuario usuario) {
     FirebaseAuth auth = FirebaseAuth.instance;
-
     auth
-        .signInWithEmailAndPassword(
+        .createUserWithEmailAndPassword(
             email: usuario.email, password: usuario.senha)
         .then((User) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     }).catchError((error) {
       setState(() {
-        _msgErro = "Login ou senha inválida";
+        _msgErro = "Erro ao cadastrar o usuário";
       });
     });
-  }
-
-  Future _verificarUsuarioLogado() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-
-    User? usuarioLogado = await auth.currentUser;
-    if (usuarioLogado != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-    }
-  }
-
-  @override
-  void initState() {
-    _verificarUsuarioLogado();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Cadastro"),
+        backgroundColor: Color(0xff075E54),
+      ),
       body: Container(
         decoration: BoxDecoration(color: Color(0xff075E54)),
         padding: EdgeInsets.all(16),
@@ -89,9 +86,27 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 32),
                   child: Image.asset(
-                    "imgs/logo.png",
+                    "imgs/cadastro.webp",
                     width: 200,
                     height: 150,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: TextField(
+                    controller: _controllerNome,
+                    autofocus: false,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        hintText: "nome",
+                        hintStyle: TextStyle(color: Colors.white30),
+                        filled: false,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
                   ),
                 ),
                 Padding(
@@ -132,7 +147,7 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () => {_validarCampos()},
                     child: Text(
-                      "Entrar",
+                      "Cadastrar",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -147,27 +162,11 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Center(
-                  child: TextButton(
-                      onPressed: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Cadastro()))
-                          },
-                      child: Text(
-                        "Cadastre-se",
-                        style: TextStyle(color: Colors.white24),
-                      )),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Center(
-                    child: Text(
-                      _msgErro,
-                      style: TextStyle(
-                        color: Colors.white24,
-                        fontSize: 14,
-                      ),
+                  child: Text(
+                    _msgErro,
+                    style: TextStyle(
+                      color: Colors.white24,
+                      fontSize: 14,
                     ),
                   ),
                 )
