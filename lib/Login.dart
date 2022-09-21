@@ -52,7 +52,8 @@ class _LoginState extends State<Login> {
         .signInWithEmailAndPassword(
             email: usuario.email, password: usuario.senha)
         .then((User) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home()));
     }).catchError((error) {
       setState(() {
         _msgErro = "Login ou senha inválida";
@@ -62,10 +63,11 @@ class _LoginState extends State<Login> {
 
   Future _verificarUsuarioLogado() async {
     FirebaseAuth auth = FirebaseAuth.instance;
-
+    //auth.signOut();
     User? usuarioLogado = await auth.currentUser;
     if (usuarioLogado != null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home()));
     }
   }
 
