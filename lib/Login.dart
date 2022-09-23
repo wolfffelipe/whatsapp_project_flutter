@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_project_flutter/Cadastro.dart';
 import 'package:whatsapp_project_flutter/Home.dart';
+import 'package:whatsapp_project_flutter/RouteGenerator.dart';
 import 'package:whatsapp_project_flutter/model/Usuario.dart';
 
 class Login extends StatefulWidget {
@@ -52,8 +53,7 @@ class _LoginState extends State<Login> {
         .signInWithEmailAndPassword(
             email: usuario.email, password: usuario.senha)
         .then((User) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_HOME);
     }).catchError((error) {
       setState(() {
         _msgErro = "Login ou senha inválida";
@@ -66,8 +66,7 @@ class _LoginState extends State<Login> {
     //auth.signOut();
     User? usuarioLogado = await auth.currentUser;
     if (usuarioLogado != null) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushReplacementNamed(context, RouteGenerator.ROTA_HOME);
     }
   }
 

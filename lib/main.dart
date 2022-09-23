@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_project_flutter/Home.dart';
 import 'package:whatsapp_project_flutter/Login.dart';
+import 'package:whatsapp_project_flutter/RouteGenerator.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,12 @@ Future main() async {
       primaryColor: Color(0xff075E54),
       //accentColor: Color(0xff075E54),
     ),
+    initialRoute: "/",
+    onGenerateRoute: RouteGenerator.generateRoute,
+    /*routes: {
+      "/login" : (context) => Login(),
+      "/home" : (context) => Home(),
+    },*/
     debugShowCheckedModeBanner: false,
   ));
 }

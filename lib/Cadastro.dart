@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_project_flutter/RouteGenerator.dart';
 import 'package:whatsapp_project_flutter/model/Usuario.dart';
 import 'package:whatsapp_project_flutter/Home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,8 +67,8 @@ class _CadastroState extends State<Cadastro> {
 
       db.collection("usuarios").doc(User.user?.uid).set(usuario.toMap());
 
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteGenerator.ROTA_HOME, (_) => false);
     }).catchError((error) {
       setState(() {
         _msgErro = "Erro ao cadastrar o usuário";
