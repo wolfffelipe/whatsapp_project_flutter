@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_project_flutter/Cadastro.dart';
+import 'package:whatsapp_project_flutter/Configuracoes.dart';
 import 'package:whatsapp_project_flutter/Home.dart';
 import 'package:whatsapp_project_flutter/Login.dart';
 
@@ -7,6 +8,7 @@ class RouteGenerator {
   static const String ROTA_HOME = "/home";
   static const String ROTA_LOGIN = "/login";
   static const String ROTA_CADASTRO = "/cadastro";
+  static const String ROTA_CONFIG = "/config";
   //static const String ROTA_RAIZ = "/";
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -19,6 +21,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => Home());
       case ROTA_CADASTRO:
         return MaterialPageRoute(builder: (context) => Cadastro());
+      case ROTA_CONFIG:
+        return MaterialPageRoute(builder: (context) => Configuracoes());
       default:
         _erroRota();
     }
